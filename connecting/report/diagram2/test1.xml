@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram width="50" namealign="center">
+    <node>
+        this
+        <node name="red" borderconnection="2" connectioncolor="#a00">
+            is
+            <node>just</node>
+            <node name="red" borderconnection="2" connectioncolor="#a00">
+                a
+                <node>test</node>
+                <node>to</node>
+                <node name="red" borderconnection="2" connectioncolor="#a00">check</node>
+            </node>
+        </node>
+        <node name="blue" borderconnection="2" connectioncolor="#00a">
+            that
+            <node>the</node>
+            <node name="blue" borderconnection="2" connectioncolor="#00a">
+                diagram
+                <node name="blue" borderconnection="2" connectioncolor="#00a">class</node>
+                <node>is</node>
+                <node name="green" borderconnection="2" connectioncolor="#0a0">really</node>
+                <node>working</node>
+            </node>
+        </node>
+    </node>
+</diagram>

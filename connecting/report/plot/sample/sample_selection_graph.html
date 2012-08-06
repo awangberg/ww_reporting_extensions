@@ -1,0 +1,225 @@
+<html>
+<head>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+-->
+<script language="javascript" type="text/javascript" src="../../../../flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="../../../../flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="../../../../flot/jquery.flot.selection.js"></script>
+<script type="text/javascript">
+  // we will add our javascript code here
+  $(document).ready(function() {
+    $("a").click(function() {
+      alert("Hello World!");
+    });
+  });
+
+</script>
+<body>
+  <!-- we will add our HTML content here -->
+  <a href="">link</a>
+
+  <h1>Flot Examples</h1>
+
+  <div style="float:left">
+    <div id="placeholder" style="width:600px;height:300px;"></div>
+  </div>
+
+  <p id="hoverdata">Mouse hovers at 
+  (<span id="x">0</span>, <span id="y"0</span>).  <span id="clickdata"></span></p>
+
+  <p>A tooltip is easy to build with a bit of jQuery code and the data returned from the plot.</p>
+
+  <p><input id="enableTooltip" type="checkbox">Enable tooltip</p>
+
+  <div id="miniature" style="float:left;margin-left:20px">
+    <div id="overview" style="width:166px;height:100px"></div>
+
+    <p id="overviewLegend" style="margin-left:10px"></p>
+  </div>
+  <p style="clear:left">  The selection support makes it easy to construct flexible zooming schemes.  With a few lines of code, the small overview plot to the right has been connected to the large plot.  Try selecting a rectangle on either of them.</p>
+
+<script id="source">
+$(function () {
+  // setup plot
+  function getData(x1, x2) {
+    var d = [];
+    for (var i = 0; i <= 100; ++i) {
+      var x = x1 + i*(x2 - x1) / 100;
+      d.push([x, Math.sin(x * x * Math.sin(x))]);
+    }
+    return [
+      { label: "sin(x sin(x))", data: d }
+      , getRegionData(x1, x2)
+    ];
+  }
+
+  function getRegionData(x1, x2) {
+    var dd = [];
+    dd.push([1, -1.5]);  dd.push(null);
+    dd.push([1, -0.5]);  dd.push(null);
+    dd.push([1,  0.5]);  dd.push(null);
+    dd.push([1,  1.5]);  dd.push(null);
+    return { label: "Region", data: dd, points: { show: true, radius: 25, fill:  true, fillColor: "#999"}, color: ["#111", "#888"]} ;
+  }
+
+
+  // setup background areas
+  var markings = [
+//    { color: '#f6f6f6', yaxis: { from: 1 }},
+//    { color: '#f6f6f6', yaxis: { to: -1 }},
+//    { color: '#aaaaaa', lineWidth: 1, yaxis: { from: 0, to: 1} },
+//    { color: '#bbccdd', lineWidth: 1, xaxis: { from: 2, to: 3}, yaxis: { from: -.5, to: 0.5} },
+//    { color: '#000', lineWidth: 1, xaxis: { from: 8, to: 8} }
+    { color: '#000044', lineWidth: 1, xaxis: { from: 0, to: 2}, yaxis: { from: -2, to: -1} },
+    { color: '#000088', lineWidth: 1, xaxis: { from: 0, to: 2}, yaxis: { from: -1, to:  0} },
+    { color: '#0000BB', lineWidth: 1, xaxis: { from: 0, to: 2}, yaxis: { from:  0, to:  1} },
+    { color: '#0000FF', lineWidth: 1, xaxis: { from: 0, to: 2}, yaxis: { from:  1, to:  2} },
+
+    { color: '#004444', lineWidth: 1, xaxis: { from: 2, to: 4}, yaxis: { from: -2, to: -1} },
+    { color: '#dd4488', lineWidth: 1, xaxis: { from: 2, to: 4}, yaxis: { from: -1, to:  0} },
+    { color: '#0044BB', lineWidth: 1, xaxis: { from: 2, to: 4}, yaxis: { from:  0, to:  1} },
+    { color: '#0044FF', lineWidth: 1, xaxis: { from: 2, to: 4}, yaxis: { from:  1, to:  2} },
+
+    { color: '#008844', lineWidth: 1, xaxis: { from: 4, to: 6}, yaxis: { from: -2, to: -1} },
+    { color: '#008888', lineWidth: 1, xaxis: { from: 4, to: 6}, yaxis: { from: -1, to:  0} },
+    { color: '#0088BB', lineWidth: 1, xaxis: { from: 4, to: 6}, yaxis: { from:  0, to:  1} },
+    { color: '#0088FF', lineWidth: 1, xaxis: { from: 4, to: 6}, yaxis: { from:  1, to:  2} },
+
+    { color: '#00BB44', lineWidth: 1, xaxis: { from: 6, to: 8}, yaxis: { from: -2, to: -1} },
+    { color: '#00BB88', lineWidth: 1, xaxis: { from: 6, to: 8}, yaxis: { from: -1, to:  0} },
+    { color: '#00BBBB', lineWidth: 1, xaxis: { from: 6, to: 8}, yaxis: { from:  0, to:  1} },
+    { color: '#00BBFF', lineWidth: 1, xaxis: { from: 6, to: 8}, yaxis: { from:  1, to:  2} },
+
+    { color: '#00FF44', lineWidth: 1, xaxis: { from: 8, to: 10}, yaxis: { from: -2, to: -1} },
+    { color: '#00FF88', lineWidth: 1, xaxis: { from: 8, to: 10}, yaxis: { from: -1, to:  0} },
+    { color: '#00FFBB', lineWidth: 1, xaxis: { from: 8, to: 10}, yaxis: { from:  0, to:  1} },
+    { color: '#00FFFF', lineWidth: 1, xaxis: { from: 8, to: 10}, yaxis: { from:  1, to:  2} },
+
+  ];
+
+  var options  = {
+    legend: { show: false },
+    series: {
+      lines: { show: true },
+      points: { show: true, radius: 5 }
+    },
+    // grid for user interaction:  clickable: true option
+    grid: { markings: markings, hoverable: true, clickable: true },
+    yaxis: { ticks: 10, min: -2, max: 2 },
+    selection: { mode: "xy" }
+  };
+
+  var startData = getData(0, 3 * Math.PI);
+
+
+  var plot = $.plot($("#placeholder"), 
+                    startData,
+                    options);
+
+  // add labels
+  // This method is does not rescale when user zooms in!
+  var o;
+
+  o = plot.pointOffset({ x: 2, y: -1.2});
+  // we just append it to the placeholder which Flot already uses for positioning
+  $("#placeholder").append('<div style="position:absolute;left:' + (o.left + 4) + 'px;top:' + o.top + 'px;color:#666;font-size:smaller">Function Evaluation</div>');
+
+
+  //tooltip option for clickable interactions
+  function showTooltip(x, y, contents) {
+    $('<div id="tooltip">' + contents + '</div>').css( {
+        position: 'absolute',
+        display: 'none',
+        top: y + 5,
+        left: x + 5,
+        border: '1px solid #fdd',
+        padding: '2px',
+        'background-color': '#fee',
+        opacity: 0.80
+    }).appendTo("body").fadeIn(200);
+  }
+
+  var previousPoint = null;
+  $("#placeholder").bind("plothover", function(event, pos, item) {
+    $("#x").text(pos.x.toFixed(2));
+    $("#y").text(pos.y.toFixed(2));
+
+    if ($("#enableTooltip:checked").length > 0) {
+      if (item) {
+        if (previousPoint != item.dataIndex) {
+          previousPoint = item.dataIndex;
+
+          $("#tooltip").remove();
+          var x = item.datapoint[0].toFixed(2),
+              y = item.datapoint[1].toFixed(2);
+
+          showTooltip(item.pageX, item.pageY,
+                      item.series.label + " of " + x + " = " + y);
+        }
+      }
+      else {
+        $("#tooltip").remove();
+        previousPoint = null;
+      }
+    }
+  });
+
+  //bind the plot to the click interaction function
+  $("#placeholder").bind("plotclick", function (event, pos, item) {
+    if (item) {
+      $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+      plot.unhighlight();
+
+      plot.highlight(item.series, item.datapoint);
+
+      //highlight a different point.  This can be done.
+      plot.highlight(item.series, [item.dataIndex / 100, item.dataIndex / 100] );
+      plot.highlight(item.series, item.dataIndex + 3);
+      plot.highlight(item.series, item.dataIndex - 10);
+    }
+  });
+
+
+
+  //setup overview
+  var overview = $.plot($("#overview"), startData, {
+      legend: { show: true, container: $("#overviewLegend") },
+      series : {
+        lines: { show: true, lineWidth: 1 },
+        shadowSize: 0
+      },
+      xaxis: { ticks: 4 },
+      yaxis: { ticks: 3, min: -2, max: 2 },
+      grid: { color: "#999", markings: markings },
+      selection: { mode: "xy" }
+    });
+
+  //now connect the two
+  $("#placeholder").bind("plotselected", function(event, ranges) {
+      // clamp the zooming to prevent eternal zoom
+      if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) 
+          ranges.xaxis.to = ranges.xaxis.from + 0.00001;
+      if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) 
+          ranges.yaxis.to = ranges.yaxis.from + 0.00001;
+
+      //do the zooming
+      plot = $.plot($("#placeholder"), getData(ranges.xaxis.from, ranges.xaxis.to),
+                    $.extend(true, {}, options, {
+			xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
+			yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
+                   }));
+
+     //don't fire event on the overview to prevent eternal loop
+     overview.setSelection(ranges, true);
+  });
+  $("#overview").bind("plotselected", function (event, ranges) {
+      plot.setSelection(ranges);
+  });
+
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,69 @@
+The php scripts in this directory communicate with the whiteboard (session.swf) flash player.  They provide information based upon requests from session.swf.  Communication is usually done through xml.
+
+The scripts are categorized as follows:
+
+Basic log-in information
+  login.php
+    -- checks to make sure username, password, and course selected from session.swf are valid in session database    
+  retrieveCourseNames.php
+    -- list the course names in the session database
+  turnWWDataIntoSessionData.php
+    -- take WeBWorK data (course, set, problem, user) and return whiteboard data (problem id) for user's recorded work.
+
+Administrator information from within session.swf
+  getProblemsForCourse.php
+    -- list tutorials completed by students in a specified WeBWorK course
+  getProblemsForStudent.php
+    -- list problems completed by student in a specified WeBWorK course
+  getStudentsForCourse.php
+    -- list students in a specified WeBWorK course
+
+Tutorial functionality
+  getMajorSkills.php
+    -- retrieve list of major mathematics skills from session database
+  getMinorSkillsConnectedToMajorSkill.php
+    -- retrieve list of minor mathematics skills connected to a major skill from session database
+  retrieveBloomsQuestions.php
+    -- retrieve list of Blooms categories and question words for each category.
+  sage.php, sage.pl
+    -- use Sage CAS to do mathematics computations to check student answers. Not used. Better: Use WW answerCheckers.
+  submitAuthoredSessionProblem.php
+    -- save a tutorial created within the session.swf flash player
+  submitResponsesToProblem.php
+    -- save a student's responses to tutorial questions replayed within the session.swf flash player
+  
+Whiteboard funcationality
+  replaySessionProblem.php
+    -- retrieve the drawing data for a problem id and ship it to the session.swf flash file, which will display it.
+  turnWWDataIntoSessionData.php   (listed above in log-in information as well)
+    -- take WeBWorK data (course, set, problem, user) and return whiteboard data (problem id) for user's recorded work.
+
+WeBWorK / session.swf communication
+  getTutorialExistenceAndVisitsFromWWData.php
+    -- return the title, id, and student's previous viewing information about a tutorial for a WeBWorK set / problem
+  getTutorialWorkForStudent.php
+    -- return the tutorial ids and answer ids for a specified student in specified course.
+  getWeBWorKSetsForCourse.php
+    -- return the sets for a WeBWorK course
+
+
+Miscellaneous files
+  access.php
+    -- the wwSession and session database host, username, and password
+  index.html.1
+    -- an index file which would prevent directory structure from being viewed through the web
+
+
+
+Directories:
+  dbAccess
+    -- database scripts for a predecessor of session.swf.  Picture Upload and LaTeX2Image script needed for tutorials.
+  old_format_connecting
+    -- php scripts for a predecessor of session.swf.  Not used anymore, I believe.
+  report
+    -- php scripts to provide reports on session.swf tutorial / WeBWorK use
+  sessionAccess
+    -- scripts to set up session database.  Index page provides links to scripts with web interfaces.
+  workWithWWDB
+    -- scripts to make WeBWorK a more personalized experience.  Scripts assign pre-test, customized homework and post-test based upon pre-test work.  Scripts also record practice information (attempts, time, correctness/incorrectness) in the wwSession database, which is then used to trigger automatic tutorials for students.
+

@@ -1,0 +1,24 @@
+<?php
+
+$db_host = "localhost";
+$db_user = "session";
+$db_pass = "piis314";
+
+$ww_db_host = "localhost";
+$ww_db_user = "webworkWrite";
+$ww_db_pass = "AWangb3rg";
+
+function check_input($value) {
+  //Stripslashes
+  if (get_magic_quotes_gpc()) {
+    $value = stripslashes($value);
+  }
+
+  // Quote if not a number
+  if (!is_numeric($value)) {
+    $value = "'" . mysql_real_escape_string($value) . "'";
+  }
+  return $value;
+}
+
+?>

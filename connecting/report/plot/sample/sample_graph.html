@@ -1,0 +1,43 @@
+<html>
+<head>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+-->
+<script language="javascript" type="text/javascript" src="../../../../flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="../../../../flot/jquery.flot.js"></script>
+<script type="text/javascript">
+  // we will add our javascript code here
+  $(document).ready(function() {
+    $("a").click(function() {
+      alert("Hello World!");
+    });
+  });
+
+</script>
+<body>
+  <!-- we will add our HTML content here -->
+  <a href="">link</a>
+
+  <h1>Flot Examples</h1>
+
+  <div id="placeholder" style="width:600px;height:300px;"></div>
+
+  <p>Simple example</p>
+
+<script type="text/javascript">
+$(function () {
+  var d1 = [];
+  for (var i = 0; i < 14; i += 0.5)
+    d1.push([i, Math.sin(i)]);
+
+  var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+
+  // a null signifies separate line segments
+  var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+
+  $.plot($("#placeholder"), [d1, d2, d3]);
+});
+</script>
+
+</body>
+</html>
+

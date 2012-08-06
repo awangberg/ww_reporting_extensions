@@ -1,0 +1,16 @@
+The files in this directory create the necessary database tables, and work with the necessary database tables, to make an early version of the whiteboard system work.  I don't believe these files are needed anymore, except that:
+
+pics/t2p2.php
+  - this file processes a string of latex code passed via the QUERY_STRING variable and produces an image file.  The latex code has to be encoded a bit to be legal.  It is useful to have textboxes in Session tutorials actually display typeset mathematics which is easily readable.
+
+uploadPicContents.php 
+  - this file lists the contents of the connecting/dbAccess/uploads directory in xml so that the whiteboard tutorial application can know which images have already been uploaded to the server
+
+uploadPics.php
+  - this file moves an image, uploaded through the whiteboard tutorial application, into the connecting/dbAccess/uploads directory
+
+uploads
+  - this is the connecting/dbAccess/uploads directory that contains the images uploaded through the whiteboard tutorial application
+
+
+NOTE:  The images here are specifically used with the session.swf flash file for tutorial applications.  There is a separate mechanism, using javascript, which the session.swf flash file uses to insert an image given a url.  Those images are pulled directly from the url (i.e. a WeBWorK tmp folder) and do not have to be stored in the uploads directory.

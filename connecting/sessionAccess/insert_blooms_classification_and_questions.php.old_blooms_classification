@@ -1,0 +1,137 @@
+<?PHP
+
+include("access.php");
+
+$db = "session";
+
+
+
+$con = mysql_connect($db_host, $db_user, $db_pass);
+
+if(!$con) {
+  die('Could not connect: ' . mysql_error());
+}
+
+//select the database '$db'
+$res = mysql_select_db("$db", $con);
+
+print "<P>Adding (1. REMEMBER / UNDERSTAND:  Recall specific details, information, ideas) to blooms_classification\n<BR>";
+$query = "INSERT INTO blooms_classification (classification) VALUES ('1. REMEMBER / UNDERSTAND:  Recall specific details, information, ideas')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (2. APPLY:  Use understanding in a meaningful way) to blooms_classification\n<BR>";
+$query = "INSERT INTO blooms_classification (classification) VALUES ('2. APPLY:  Use understanding in a meaningful way')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (3. ANALYZE:  Find differences / similarities in information) to blooms_classification\n<BR>";
+$query = "INSERT INTO blooms_classification (classification) VALUES ('3. ANALYZE:  Find differences / similarities in information')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (4. CREATE:  Use a prediction based on analysis of given data) to blooms_classification\n<BR>";
+$query = "INSERT INTO blooms_classification (classification) VALUES ('4. CREATE:  Use a prediction based on analysis of given data')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (5. EVALUATE:  Critically examine data, find solution to problem) to blooms_classification\n<BR>";
+$query = "INSERT INTO blooms_classification (classification) VALUES ('5. EVALUATE:  Critically examine data, find solution to problem')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+
+print "<P>Adding (1, Identify) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('1', 'Identify')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (1, Locate) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('1', 'Locate')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (1, Match) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('1', 'Match')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (1, Recall) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('1', 'Recall')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (2, Construct) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('2', 'Construct')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (2, Sketch) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('2', 'Sketch')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (2, List) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('2', 'List')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (3, Compare / Constrast) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('3', 'Compare / Constrast')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (3, Classify) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('3', 'Classify')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (4, Predict) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('4', 'Predict')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (4, Hypothesize) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('4', 'Hypothesize')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (4, Estimate) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('4', 'Estimate')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (4, Create) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('4', 'Create')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (5, Decide what) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('5', 'Decide what')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (5, Decide which) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('5', 'Decide which')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (5, Evaluate) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('5', 'Evaluate')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (5, Choose) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('5', 'Choose')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+print "<P>Adding (5, Decide) to blooms_question\n<BR>";
+$query = "INSERT INTO blooms_question (blooms_classification_id, question_word) VALUES ('5', 'Decide')";
+$result = mysql_query($query, $con);
+print "<P>Query: $query</P>";
+
+
+mysql_close($con);
+
+?>

@@ -1,0 +1,46 @@
+<?php
+
+if ($argc != 3) {
+  die("Usage: replace_old_user_id_with_new_user_id <old_user_id> <new_user_id>\n");
+}
+
+// remove first argument
+array_shift($argv);
+
+//get and use remaining arguments:
+$old_id = $argv[0];
+$new_id = $argv[1];
+
+include("access.php");
+
+$con = mysql_connect($db_host, $db_user, $db_pass);
+
+if(!$con) {
+  die('Could not connect: ' . mysql_error());
+}
+
+$db = 'session';
+if (mysql_select_db("$db", $con)) {
+	//echo "selected database $db";
+}
+else {
+  	echo "Error selecting database $db: " . mysql_error();
+}
+
+$query = "UPDATE wwStudentWorkForProblem SET user_id = '$new_id' WHERE user_id='$old_id'";
+$result1 = mysql_query($query, $con);
+
+$query = "UPDATE user SET user_id = '-$old_id', comment='$old_id -> $new_id' WHERE user_id='$old_id'";
+$result2 = mysql_query($query, $con);
+
+$query = "UPDATE student_answer SET student_id = '$new_id' WHERE student_id = '$old_id'";
+$result3 = mysql_query($query, $con);
+
+$query = "UPDATE permission SET user_id = '-$old_id' WHERE user_id = '$old_id'";
+$result4 = mysql_query($query, $con);
+
+mysql_close($con);
+
+print "$result1 \n $result2 \n $result3\n $result4\n";
+
+?>
