@@ -23,6 +23,8 @@ function javascript() {
     </style>
     <script>
       $(document).ready(function(){
+	var screenCssPixelRatio = (window.outerWidth - 8) / window.innerWidth;
+	if (screenCssPixelRatio < .98 || screenCssPixelRatio > 1.02) { alert('Current Browser Zoom level prevents clicks on image maps to produce student work.  Please set Zoom Level to 100% in Chrome.'); }
         $('#replayWindow').hide();
         $('#marker').hide();
 	$('#tracer1').hide();
